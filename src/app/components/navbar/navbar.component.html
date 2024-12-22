@@ -1,0 +1,83 @@
+<header class="antialiased">
+  <nav class=" navbar-logged bg-white border-gray-700 px-4 py-3 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50">
+      <div class="flex flex-wrap justify-between items-center mx-auto ">
+
+
+              <a  class="flex mr-4 margin pr-0 md:pr-8">
+                <img class="mr-1 h-8" viewBox="0 0 33 33" fill="none" src="../../../assets/home.webp">
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-white dark:text-white ">EvaClub</span>
+              </a>
+
+
+            <!-- ADMIN -->
+            <div *ngIf="isLoggedIn && hasAdminRole" class="flex items-center lg:order-2">
+              <!-- Cumpleaños -->
+              <button type="button" data-dropdown-toggle="notification-dropdown" class="flex items-center p-2 mr-1 text-white rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+                <span class="sr-only">View notifications</span>
+                <!-- Bell icon -->
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20 7h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C10.4 2.842 8.949 2 7.5 2A3.5 3.5 0 0 0 4 5.5c.003.52.123 1.033.351 1.5H4a2 2 0 0 0-2 2v2a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V9a2 2 0 0 0-2-2Zm-9.942 0H7.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM13 14h-2v8h2v-8Zm-4 0H4v6a2 2 0 0 0 2 2h3v-8Zm6 0v8h3a2 2 0 0 0 2-2v-6h-5Z"/>
+                </svg>
+
+                <span class="inline-flex justify-center items-center w-6 h-5 text-sm font-semibold rounded-full text-[#0c0033] bg-primary-100 dark:bg-primary-200 dark:text-primary-800 ml-2">
+
+                </span>
+              </button>
+              <!-- Dropdown menu -->
+              <div  class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg dark:divide-gray-600 dark:bg-gray-700" id="notification-dropdown">
+                  <div class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                      Notificaciones
+                  </div>
+
+
+
+
+
+                  <a  routerLink="/admin/birthday"  class=" cursor-pointer block py-2 text-base font-medium text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:underline">
+                      <div class="inline-flex items-center ">
+                      <svg aria-hidden="true" class="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                      Ver todo
+                      </div>
+                  </a>
+              </div>
+            <!-- Perfil -->
+            <button type="button" class="flex mx-3  px-2 py-1.5  bg-[#FFFF] items-center justify-center font-semibold rounded-lg text-xs md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
+                <span class="sr-only">Open user menu</span>
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                </svg><span class="hidden lg:inline">{{ user?.nombre | capitalize }} {{ user?.apellidoPaterno | capitalize }}</span>
+                <span class="inline lg:hidden"></span>
+
+            </button>
+            <!-- Dropdown menu -->
+            <div class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown">
+                <div class="py-3 px-4">
+                    <span class="block text-sm font-semibold text-gray-900 dark:text-white">{{ user?.nombre | capitalize }} {{ user?.apellidoPaterno | capitalize }} {{ user?.apellidoMaterno | capitalize }}</span>
+                    <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{ user?.email }}</span>
+                </div>
+                <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
+                    <li>
+                        <a class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white cursor-pointer">Mi Perfil</a>
+                    </li>
+                    <li>
+                        <a  class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white cursor-pointer">Ajustes de Cuenta</a>
+                    </li>
+                </ul>
+
+                <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
+                    <li>
+                        <a (click) = "logout()"   class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+
+            </div>
+
+
+
+
+
+
+      </div>
+  </nav>
+</header>
